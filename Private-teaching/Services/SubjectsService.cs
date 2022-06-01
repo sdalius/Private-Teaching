@@ -89,8 +89,9 @@ namespace Private_teaching.Services
         {
             var subjectRelationExists = _dbContext.PassedTestsOnSubjects
                 .Where(e => e.Subject_Id == subject_Id)
-                .Where(e => e.Id == userId)
-                .First();
+                .Where(e => e.Id == userId).FirstOrDefault();
+
+            var nu = 60;
 
             if (subjectRelationExists != null)
             {
