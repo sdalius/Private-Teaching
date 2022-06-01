@@ -9,8 +9,8 @@ env:
   AZURE_WEBAPP_PUBLISH_PROFILE: ${{ secrets.Private_teaching_224c }}
   CONFIGURATION: Release
   DOTNET_CORE_VERSION: 6.0.x
-  WORKING_DIRECTORY: /Private-teaching/
-  WORKING_TEST_DIRECTORY: /PrivateTeachingTesting/
+  WORKING_DIRECTORY: Private-teaching
+  WORKING_TEST_DIRECTORY: PrivateTeachingTesting
 jobs:
   build-and-deploy:
     runs-on: windows-latest
