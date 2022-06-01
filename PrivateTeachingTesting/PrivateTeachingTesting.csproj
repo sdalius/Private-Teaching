@@ -26,4 +26,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Private-teaching\Private-teaching.csproj" />
+  </ItemGroup>
+
 </Project>
