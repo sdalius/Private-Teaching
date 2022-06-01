@@ -6,6 +6,7 @@ using Microsoft.OpenApi.Models;
 using Private_teaching.Helpers;
 using Private_teaching.Mapping;
 using Private_teaching.Models.Entities;
+using Private_teaching.Services;
 using System.Reflection;
 using System.Text;
 
@@ -15,6 +16,9 @@ ConfigurationManager configuration = builder.Configuration;
 // Add services to the container.
 // For Entity Framework
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(configuration.GetConnectionString("ConnStr"), x => x.MigrationsHistoryTable("_EFMigrationsHistory", "private_teaching_schema")));
+
+// Add a custom scoped service
+builder.Services.AddScoped<ISubjectsService, SubjectsService>();
 
 // For Identity
 builder.Services.AddIdentity<ApplicationUsers, IdentityRole>()
