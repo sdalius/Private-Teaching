@@ -10,8 +10,8 @@ using System.Security.Claims;
 
 namespace Private_teaching.Controllers
 {
-    [Route("[controller]")]
     [ApiController]
+    [Route("[controller]")]
     public class ListSubjectsController : ControllerBase
     {
         private readonly ISubjectsService _listedSubjectService;

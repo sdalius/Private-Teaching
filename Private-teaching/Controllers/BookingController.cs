@@ -11,8 +11,9 @@ using System.Security.Claims;
 
 namespace Private_teaching.Controllers
 {
-    [Route("[controller]")]
+
     [ApiController]
+    [Route("[controller]")]
     public class BookingController : ControllerBase
     {
         private readonly ApplicationDbContext _dbContext;
@@ -68,6 +69,7 @@ namespace Private_teaching.Controllers
         public async Task<IActionResult> BookAnOffer([FromBody] BookTimeDTO model)
         {
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = await _dbContext.Students.FindAsync(userId);
             var offer = await _dbContext.Offers.FindAsync(model.Offer_Id);
 
             if (offer == null)
@@ -80,15 +82,18 @@ namespace Private_teaching.Controllers
                 {
                     Booking booking = new Booking
                     {
-                        Id = userId,
+                        Student = user,
                         Offers = offer
                     };
                     await _dbContext.Bookings.AddAsync(booking);
                     _dbContext.SaveChanges();
 
+
+                    var findBooking = _dbContext.Bookings.Find(booking.booking_Id, offer.Offer_Id);
+
                     var bookedTimes = _mapper.Map<BookTimeDTO, BookedTimes>(model);
-                    bookedTimes.booking_Id = booking.booking_Id;
-                    bookedTimes.Id = userId;
+                    bookedTimes.Booking = findBooking;
+                    bookedTimes.Student = user;
 
                     await _dbContext.BookedTimes.AddAsync(bookedTimes);
                     _dbContext.SaveChanges();

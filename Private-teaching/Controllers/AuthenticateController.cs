@@ -12,8 +12,9 @@ using System.Text;
 
 namespace Private_teaching.Controllers
 {
-    [Route("[controller]")]
+
     [ApiController]
+    [Route("[controller]")]
     public class AuthenticateController : ControllerBase
     {
         private readonly UserManager<ApplicationUsers> _userManager;
